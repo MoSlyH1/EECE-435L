@@ -1,57 +1,119 @@
-class InventoryService:
-    """
-    [Summary]
-    Service responsible for managing the inventory of goods.
+from flask import Flask
+import sqlite3
 
-    [Attributes]
-    :param app: The Flask application instance.
-    :type app: Flask
+app = Flask(__name__)
 
-    [Methods]
-    :raises InsufficientStockError: If there is not enough stock during goods deduction.
+def connect_to_db():
+    conn = sqlite3.connect('inventory.db')
+    return conn
 
-    """
+def create_goods_table():
+    try:
+        conn = connect_to_db()
+        conn.execute('''
+            CREATE TABLE goods (
+                id INTEGER PRIMARY KEY NOT NULL,
+                name TEXT NOT NULL,
+                category TEXT NOT NULL,
+                price REAL NOT NULL,
+                description TEXT,
+                count INTEGER NOT NULL
+            );
+        ''')
+        conn.commit()
+        print("Goods table created successfully")
+    except:
+        print("Goods table creation failed - Maybe table already exists")
+    finally:
+        conn.close()
 
-    def __init__(self, app):
-        """
-        [Summary]
-        Constructor method for InventoryService.
+def insert_goods(goods):
+    inserted_goods = {}
+    try:
+        conn = connect_to_db()
+        cur = conn.cursor()
+        cur.execute("INSERT INTO goods (name, category, price, description, count) VALUES (?, ?, ?, ?, ?)",
+                    (goods['name'], goods['category'], goods['price'], goods['description'], goods['count']))
+        conn.commit()
+        inserted_goods = get_goods_by_id(cur.lastrowid)
+    except:
+        conn.rollback()
+    finally:
+        conn.close()
 
-        :param app: The Flask application instance.
-        :type app: Flask
-        """
-        self.app = app
+    return inserted_goods
 
-    def add_goods(self, name, category, price_per_item, description, count):
-        """
-        [Summary]
-        Add goods to the inventory.
+def get_goods():
+    goods_list = []
+    try:
+        conn = connect_to_db()
+        conn.row_factory = sqlite3.Row
+        cur = conn.cursor()
+        cur.execute("SELECT * FROM goods")
+        rows = cur.fetchall()
+        for row in rows:
+            goods = dict(row)
+            goods_list.append(goods)
+    except:
+        goods_list = []
 
-        :param name: The name of the goods.
-        :type name: str
-        :param category: The category of the goods (food, clothes, accessories, electronics).
-        :type category: str
-        :param price_per_item: The price per item of the goods.
-        :type price_per_item: float
-        :param description: The description of the goods.
-        :type description: str
-        :param count: The count of available items in stock.
-        :type count: int
-        """
-        pass
+    return goods_list
 
-    def deduct_goods(self, name, quantity):
-        """
-        [Summary]
-        Deduct goods from the inventory.
+def get_goods_by_id(goods_id):
+    goods = {}
+    try:
+        conn = connect_to_db()
+        conn.row_factory = sqlite3.Row
+        cur = conn.cursor()
+        cur.execute("SELECT * FROM goods WHERE id = ?", (goods_id,))
+        row = cur.fetchone()
+        if row:
+            goods = dict(row)
+    except:
+        goods = {}
 
-        :param name: The name of the goods.
-        :type name: str
-        :param quantity: The quantity of goods to deduct.
-        :type quantity: int
+    return goods
 
-        :raises InsufficientStockError: If there is not enough stock during goods deduction.
-        """
-        pass
+def update_goods(goods):
+    updated_goods = {}
+    try:
+        conn = connect_to_db()
+        cur = conn.cursor()
+        cur.execute("UPDATE goods SET name = ?, category = ?, price = ?, description = ?, count = ? WHERE id = ?",
+                    (goods["name"], goods["category"], goods["price"], goods["description"], goods["count"], goods["id"]))
+        conn.commit()
+        updated_goods = get_goods_by_id(goods["id"])
+    except:
+        conn.rollback()
+    finally:
+        conn.close()
 
-    # Additional methods for other functionalities...
+    return updated_goods
+
+def deduct_goods(goods_id):
+    message = {}
+    try:
+        conn = connect_to_db()
+        cur = conn.cursor()
+        cur.execute("DELETE from goods WHERE id = ?", (goods_id,))
+        conn.commit()
+        message["status"] = "Goods deducted successfully"
+    except:
+        conn.rollback()
+        message["status"] = "Cannot deduct goods"
+    finally:
+        conn.close()
+
+    return message
+
+# Initialize goods table
+create_goods_table()
+
+# Example goods data
+goods_data = {
+    "name": "Laptop",
+    "category": "electronics",
+    "price": 1200.00,
+    "description": "High-performance laptop",
+    "count": 10
+}
