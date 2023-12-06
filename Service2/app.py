@@ -26,7 +26,4 @@ def get_goods_route():
     return jsonify(goods_list)
 
 if __name__ == '__main__':
-    app.run(debug=True)
-
-if __name__ == '__main__':
     app.run(debug=True, port=5002)  # Adjust the port as needed
