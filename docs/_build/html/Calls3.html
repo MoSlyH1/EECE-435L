@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calls3 module &mdash; Wallet Project 435L 0.9 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Doc_Ser1 module" href="Doc_Ser1.html" />
+    <link rel="prev" title="Calls2 module" href="Calls2.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Wallet Project 435L
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">Project435L</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Calls1.html">Calls1 module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Calls2.html">Calls2 module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Calls3 module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Calls3.display_available_goods_route"><code class="docutils literal notranslate"><span class="pre">display_available_goods_route()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Calls3.full_purchase_history_route"><code class="docutils literal notranslate"><span class="pre">full_purchase_history_route()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Calls3.get_good_details_route"><code class="docutils literal notranslate"><span class="pre">get_good_details_route()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Calls3.make_sale_route"><code class="docutils literal notranslate"><span class="pre">make_sale_route()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Calls3.user_purchase_history_route"><code class="docutils literal notranslate"><span class="pre">user_purchase_history_route()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Doc_Ser1.html">Doc_Ser1 module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Doc_Ser2.html">Doc_Ser2 module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Doc_Ser3.html">Doc_Ser3 module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_service1.html">test_service1 module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_service2.html">test_service2 module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_service3.html">test_service3 module</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Wallet Project 435L</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">Project435L</a></li>
+      <li class="breadcrumb-item active">Calls3 module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/Calls3.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-Calls3">
+<span id="calls3-module"></span><h1>Calls3 module<a class="headerlink" href="#module-Calls3" title="Permalink to this heading"></a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="Calls3.display_available_goods_route">
+<span class="sig-prename descclassname"><span class="pre">Calls3.</span></span><span class="sig-name descname"><span class="pre">display_available_goods_route</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Calls3.html#display_available_goods_route"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Calls3.display_available_goods_route" title="Permalink to this definition"></a></dt>
+<dd><p>Endpoint for displaying available goods.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A JSON response containing a list of available goods or an error message.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>jsonify</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="Calls3.full_purchase_history_route">
+<span class="sig-prename descclassname"><span class="pre">Calls3.</span></span><span class="sig-name descname"><span class="pre">full_purchase_history_route</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Calls3.html#full_purchase_history_route"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Calls3.full_purchase_history_route" title="Permalink to this definition"></a></dt>
+<dd><p>Endpoint for retrieving the full purchase history.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A JSON response containing a list of dictionaries with information about each purchase.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>jsonify</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="Calls3.get_good_details_route">
+<span class="sig-prename descclassname"><span class="pre">Calls3.</span></span><span class="sig-name descname"><span class="pre">get_good_details_route</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">good_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Calls3.html#get_good_details_route"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Calls3.get_good_details_route" title="Permalink to this definition"></a></dt>
+<dd><p>Endpoint for retrieving details of a specific good by its name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>good_name</strong> (<em>str</em>) – The name of the good.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A JSON response containing details of the specified good or an error message.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>jsonify</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="Calls3.make_sale_route">
+<span class="sig-prename descclassname"><span class="pre">Calls3.</span></span><span class="sig-name descname"><span class="pre">make_sale_route</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Calls3.html#make_sale_route"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Calls3.make_sale_route" title="Permalink to this definition"></a></dt>
+<dd><p>Endpoint for processing a sale, deducting money from the customer’s wallet, updating the goods count, and saving the purchase history.</p>
+<p>Expects a JSON payload in the request with information about the good and customer making the purchase.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A JSON response containing a status message or an error message if the sale process fails.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>jsonify</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="Calls3.user_purchase_history_route">
+<span class="sig-prename descclassname"><span class="pre">Calls3.</span></span><span class="sig-name descname"><span class="pre">user_purchase_history_route</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">customer_username</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Calls3.html#user_purchase_history_route"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Calls3.user_purchase_history_route" title="Permalink to this definition"></a></dt>
+<dd><p>Endpoint for retrieving the purchase history of a specific user.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>customer_username</strong> (<em>str</em>) – The username of the customer.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A JSON response containing a list of dictionaries with information about each purchase of the user.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>jsonify</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Calls2.html" class="btn btn-neutral float-left" title="Calls2 module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Doc_Ser1.html" class="btn btn-neutral float-right" title="Doc_Ser1 module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Halawi Ghosn H, Mosleh J.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

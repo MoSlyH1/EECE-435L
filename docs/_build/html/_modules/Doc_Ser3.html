@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Doc_Ser3 &mdash; Wallet Project 435L 0.9 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Wallet Project 435L
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../modules.html">Project435L</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Wallet Project 435L</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Module code</a></li>
+      <li class="breadcrumb-item active">Doc_Ser3</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for Doc_Ser3</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">sqlite3</span>
+
+<span class="c1"># URLs for the customer and goods services</span>
+<span class="n">CUSTOMER_SERVICE_URL</span> <span class="o">=</span> <span class="s2">&quot;http://localhost:5001&quot;</span> 
+<span class="n">GOODS_SERVICE_URL</span> <span class="o">=</span> <span class="s2">&quot;http://localhost:5002&quot;</span>
+
+<span class="c1"># Database setup</span>
+<div class="viewcode-block" id="connect_to_db"><a class="viewcode-back" href="../Doc_Ser3.html#Doc_Ser3.connect_to_db">[docs]</a><span class="k">def</span> <span class="nf">connect_to_db</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Establishes a connection to the SQLite database.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        sqlite3.Connection: A connection object to the database.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s1">&#39;purchase_history.db&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">conn</span></div>
+
+<div class="viewcode-block" id="create_purchase_history_table"><a class="viewcode-back" href="../Doc_Ser3.html#Doc_Ser3.create_purchase_history_table">[docs]</a><span class="k">def</span> <span class="nf">create_purchase_history_table</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Creates the &#39;purchase_history&#39; table in the database if it does not exist.</span>
+
+<span class="sd">    Prints a success message if the table is created, or an error message if the table creation fails.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">conn</span> <span class="o">=</span> <span class="n">connect_to_db</span><span class="p">()</span>
+        <span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">            CREATE TABLE IF NOT EXISTS purchase_history (</span>
+<span class="s1">                id INTEGER PRIMARY KEY NOT NULL,</span>
+<span class="s1">                customer_username TEXT NOT NULL,</span>
+<span class="s1">                good_name TEXT NOT NULL,</span>
+<span class="s1">                good_price REAL NOT NULL,</span>
+<span class="s1">                timestamp TIMESTAMP NOT NULL</span>
+<span class="s1">            );</span>
+<span class="s1">        &#39;&#39;&#39;</span><span class="p">)</span>
+        <span class="n">conn</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Purchase history table created successfully&quot;</span><span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Purchase history table creation failed - Maybe table already exists&quot;</span><span class="p">)</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+
+<span class="c1"># Initialize purchase history table</span>
+<span class="n">create_purchase_history_table</span><span class="p">()</span>
+
+<div class="viewcode-block" id="display_available_goods"><a class="viewcode-back" href="../Doc_Ser3.html#Doc_Ser3.display_available_goods">[docs]</a><span class="k">def</span> <span class="nf">display_available_goods</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Retrieves a list of available goods from the goods service.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        list: A list of dictionaries containing information about available goods.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">GOODS_SERVICE_URL</span><span class="si">}</span><span class="s2">/get_goods&quot;</span><span class="p">)</span>
+        <span class="n">goods_list</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+        <span class="n">available_goods</span> <span class="o">=</span> <span class="p">[{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">good</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">],</span> <span class="s2">&quot;price&quot;</span><span class="p">:</span> <span class="n">good</span><span class="p">[</span><span class="s2">&quot;price&quot;</span><span class="p">]}</span> <span class="k">for</span> <span class="n">good</span> <span class="ow">in</span> <span class="n">goods_list</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">available_goods</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;Error fetching available goods: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">}</span></div>
+
+<div class="viewcode-block" id="get_good_details"><a class="viewcode-back" href="../Doc_Ser3.html#Doc_Ser3.get_good_details">[docs]</a><span class="k">def</span> <span class="nf">get_good_details</span><span class="p">(</span><span class="n">good_name</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Retrieves details of a specific good by its name from the goods service.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        good_name (str): The name of the good.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dict: A dictionary containing information about the specified good.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">GOODS_SERVICE_URL</span><span class="si">}</span><span class="s2">/get_goods&quot;</span><span class="p">)</span>
+        <span class="n">goods_list</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">good</span> <span class="ow">in</span> <span class="n">goods_list</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">good</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">good_name</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">good</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;Good not found&quot;</span><span class="p">}</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;Error fetching good details: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">}</span></div>
+
+<div class="viewcode-block" id="save_purchase_history"><a class="viewcode-back" href="../Doc_Ser3.html#Doc_Ser3.save_purchase_history">[docs]</a><span class="k">def</span> <span class="nf">save_purchase_history</span><span class="p">(</span><span class="n">purchase_history</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Saves the purchase history to the purchase history table.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        purchase_history (dict): A dictionary containing information about the purchase.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">conn</span> <span class="o">=</span> <span class="n">connect_to_db</span><span class="p">()</span>
+        <span class="n">cur</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+        <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;INSERT INTO purchase_history (customer_username, good_name, good_price, timestamp) VALUES (?, ?, ?, ?)&quot;</span><span class="p">,</span>
+                    <span class="p">(</span><span class="n">purchase_history</span><span class="p">[</span><span class="s1">&#39;customer_username&#39;</span><span class="p">],</span> <span class="n">purchase_history</span><span class="p">[</span><span class="s1">&#39;good_name&#39;</span><span class="p">],</span> <span class="n">purchase_history</span><span class="p">[</span><span class="s1">&#39;good_price&#39;</span><span class="p">],</span> <span class="n">purchase_history</span><span class="p">[</span><span class="s1">&#39;timestamp&#39;</span><span class="p">]))</span>
+        <span class="n">conn</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error saving purchase history: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">conn</span><span class="o">.</span><span class="n">rollback</span><span class="p">()</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="get_full_purchase_history"><a class="viewcode-back" href="../Doc_Ser3.html#Doc_Ser3.get_full_purchase_history">[docs]</a><span class="k">def</span> <span class="nf">get_full_purchase_history</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Retrieves the full purchase history from the purchase history table.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        list: A list of dictionaries containing information about each purchase.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">conn</span> <span class="o">=</span> <span class="n">connect_to_db</span><span class="p">()</span>
+        <span class="n">conn</span><span class="o">.</span><span class="n">row_factory</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">Row</span>
+        <span class="n">cur</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+        <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM purchase_history&quot;</span><span class="p">)</span>
+        <span class="n">rows</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+        <span class="n">purchase_history_list</span> <span class="o">=</span> <span class="p">[</span><span class="nb">dict</span><span class="p">(</span><span class="n">row</span><span class="p">)</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">rows</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">purchase_history_list</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error fetching full purchase history: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;Error fetching full purchase history&quot;</span><span class="p">}</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="get_user_purchase_history"><a class="viewcode-back" href="../Doc_Ser3.html#Doc_Ser3.get_user_purchase_history">[docs]</a><span class="k">def</span> <span class="nf">get_user_purchase_history</span><span class="p">(</span><span class="n">customer_username</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Retrieves the purchase history of a specific user from the purchase history table.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        customer_username (str): The username of the customer.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        list: A list of dictionaries containing information about each purchase of the user.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">conn</span> <span class="o">=</span> <span class="n">connect_to_db</span><span class="p">()</span>
+        <span class="n">conn</span><span class="o">.</span><span class="n">row_factory</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">Row</span>
+        <span class="n">cur</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+        <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM purchase_history WHERE customer_username = ?&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">customer_username</span><span class="p">,))</span>
+        <span class="n">rows</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+        <span class="n">user_purchase_history</span> <span class="o">=</span> <span class="p">[</span><span class="nb">dict</span><span class="p">(</span><span class="n">row</span><span class="p">)</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">rows</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">user_purchase_history</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error fetching user purchase history: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;Error fetching user purchase history&quot;</span><span class="p">}</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="make_sale"><a class="viewcode-back" href="../Doc_Ser3.html#Doc_Ser3.make_sale">[docs]</a><span class="k">def</span> <span class="nf">make_sale</span><span class="p">(</span><span class="n">good_name</span><span class="p">,</span> <span class="n">customer_username</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Processes a sale, deducting money from the customer&#39;s wallet, updating the goods count, and saving the purchase history.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        good_name (str): The name of the good to be purchased.</span>
+<span class="sd">        customer_username (str): The username of the customer making the purchase.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        dict: A dictionary containing a status message or an error message if the sale process fails.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Check if the good is available</span>
+        <span class="n">good_details</span> <span class="o">=</span> <span class="n">get_good_details</span><span class="p">(</span><span class="n">good_name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s2">&quot;error&quot;</span> <span class="ow">in</span> <span class="n">good_details</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">good_details</span>
+
+        <span class="c1"># Check if the customer has enough money</span>
+        <span class="n">customer_details</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">CUSTOMER_SERVICE_URL</span><span class="si">}</span><span class="s2">/get_customer/</span><span class="si">{</span><span class="n">customer_username</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+        <span class="k">if</span> <span class="s2">&quot;error&quot;</span> <span class="ow">in</span> <span class="n">customer_details</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">customer_details</span>
+
+        <span class="n">good_price</span> <span class="o">=</span> <span class="n">good_details</span><span class="p">[</span><span class="s2">&quot;price&quot;</span><span class="p">]</span>
+        <span class="n">customer_wallet_balance</span> <span class="o">=</span> <span class="n">customer_details</span><span class="p">[</span><span class="s2">&quot;wallet_balance&quot;</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">customer_wallet_balance</span> <span class="o">&lt;</span> <span class="n">good_price</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;Insufficient funds to make the purchase&quot;</span><span class="p">}</span>
+
+        <span class="c1"># Deduct money from customer&#39;s wallet</span>
+        <span class="n">response_deduct</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">CUSTOMER_SERVICE_URL</span><span class="si">}</span><span class="s2">/deduct_wallet/</span><span class="si">{</span><span class="n">customer_username</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">good_price</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">response_deduct</span><span class="o">.</span><span class="n">status_code</span> <span class="o">!=</span> <span class="mi">200</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;Error deducting money from customer&#39;s wallet&quot;</span><span class="p">}</span>
+
+        <span class="c1"># Update the count of the purchased good</span>
+        <span class="n">updated_goods</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">good_details</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">good_details</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="n">good_details</span><span class="p">[</span><span class="s2">&quot;category&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;price&quot;</span><span class="p">:</span> <span class="n">good_details</span><span class="p">[</span><span class="s2">&quot;price&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="n">good_details</span><span class="p">[</span><span class="s2">&quot;description&quot;</span><span class="p">],</span>
+            <span class="s2">&quot;count&quot;</span><span class="p">:</span> <span class="n">good_details</span><span class="p">[</span><span class="s2">&quot;count&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>  <span class="c1"># Assuming 1 item per purchase</span>
+        <span class="p">}</span>
+        <span class="n">response_update_goods</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">GOODS_SERVICE_URL</span><span class="si">}</span><span class="s2">/update_goods&quot;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">updated_goods</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">response_update_goods</span><span class="o">.</span><span class="n">status_code</span> <span class="o">!=</span> <span class="mi">200</span><span class="p">:</span>
+            <span class="c1"># Rollback the deducted money</span>
+            <span class="n">requests</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">CUSTOMER_SERVICE_URL</span><span class="si">}</span><span class="s2">/charge_wallet/</span><span class="si">{</span><span class="n">customer_username</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">good_price</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="s2">&quot;Error updating goods count&quot;</span><span class="p">}</span>
+
+        <span class="c1"># Save the purchase history</span>
+        <span class="n">purchase_history</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;customer_username&quot;</span><span class="p">:</span> <span class="n">customer_username</span><span class="p">,</span>
+            <span class="s2">&quot;good_name&quot;</span><span class="p">:</span> <span class="n">good_name</span><span class="p">,</span>
+            <span class="s2">&quot;good_price&quot;</span><span class="p">:</span> <span class="n">good_price</span><span class="p">,</span>
+            <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;current_timestamp()&quot;</span>  <span class="c1"># could have used datetime but decided to just comment it out for now</span>
+        <span class="p">}</span>
+        <span class="n">save_purchase_history</span><span class="p">(</span><span class="n">purchase_history</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;Sale completed successfully&quot;</span><span class="p">}</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;Error making sale: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">}</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Halawi Ghosn H, Mosleh J.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

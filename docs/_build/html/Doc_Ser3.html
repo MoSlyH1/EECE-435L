@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Doc_Ser3 module &mdash; Wallet Project 435L 0.9 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="test_service1 module" href="test_service1.html" />
+    <link rel="prev" title="Doc_Ser2 module" href="Doc_Ser2.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Wallet Project 435L
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">Project435L</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Calls1.html">Calls1 module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Calls2.html">Calls2 module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Calls3.html">Calls3 module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Doc_Ser1.html">Doc_Ser1 module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Doc_Ser2.html">Doc_Ser2 module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Doc_Ser3 module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Doc_Ser3.connect_to_db"><code class="docutils literal notranslate"><span class="pre">connect_to_db()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Doc_Ser3.create_purchase_history_table"><code class="docutils literal notranslate"><span class="pre">create_purchase_history_table()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Doc_Ser3.display_available_goods"><code class="docutils literal notranslate"><span class="pre">display_available_goods()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Doc_Ser3.get_full_purchase_history"><code class="docutils literal notranslate"><span class="pre">get_full_purchase_history()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Doc_Ser3.get_good_details"><code class="docutils literal notranslate"><span class="pre">get_good_details()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Doc_Ser3.get_user_purchase_history"><code class="docutils literal notranslate"><span class="pre">get_user_purchase_history()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Doc_Ser3.make_sale"><code class="docutils literal notranslate"><span class="pre">make_sale()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Doc_Ser3.save_purchase_history"><code class="docutils literal notranslate"><span class="pre">save_purchase_history()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="test_service1.html">test_service1 module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_service2.html">test_service2 module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_service3.html">test_service3 module</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Wallet Project 435L</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">Project435L</a></li>
+      <li class="breadcrumb-item active">Doc_Ser3 module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/Doc_Ser3.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-Doc_Ser3">
+<span id="doc-ser3-module"></span><h1>Doc_Ser3 module<a class="headerlink" href="#module-Doc_Ser3" title="Permalink to this heading"></a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="Doc_Ser3.connect_to_db">
+<span class="sig-prename descclassname"><span class="pre">Doc_Ser3.</span></span><span class="sig-name descname"><span class="pre">connect_to_db</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Doc_Ser3.html#connect_to_db"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Doc_Ser3.connect_to_db" title="Permalink to this definition"></a></dt>
+<dd><p>Establishes a connection to the SQLite database.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A connection object to the database.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>sqlite3.Connection</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="Doc_Ser3.create_purchase_history_table">
+<span class="sig-prename descclassname"><span class="pre">Doc_Ser3.</span></span><span class="sig-name descname"><span class="pre">create_purchase_history_table</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Doc_Ser3.html#create_purchase_history_table"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Doc_Ser3.create_purchase_history_table" title="Permalink to this definition"></a></dt>
+<dd><p>Creates the ‘purchase_history’ table in the database if it does not exist.</p>
+<p>Prints a success message if the table is created, or an error message if the table creation fails.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="Doc_Ser3.display_available_goods">
+<span class="sig-prename descclassname"><span class="pre">Doc_Ser3.</span></span><span class="sig-name descname"><span class="pre">display_available_goods</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Doc_Ser3.html#display_available_goods"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Doc_Ser3.display_available_goods" title="Permalink to this definition"></a></dt>
+<dd><p>Retrieves a list of available goods from the goods service.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A list of dictionaries containing information about available goods.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="Doc_Ser3.get_full_purchase_history">
+<span class="sig-prename descclassname"><span class="pre">Doc_Ser3.</span></span><span class="sig-name descname"><span class="pre">get_full_purchase_history</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Doc_Ser3.html#get_full_purchase_history"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Doc_Ser3.get_full_purchase_history" title="Permalink to this definition"></a></dt>
+<dd><p>Retrieves the full purchase history from the purchase history table.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A list of dictionaries containing information about each purchase.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="Doc_Ser3.get_good_details">
+<span class="sig-prename descclassname"><span class="pre">Doc_Ser3.</span></span><span class="sig-name descname"><span class="pre">get_good_details</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">good_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Doc_Ser3.html#get_good_details"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Doc_Ser3.get_good_details" title="Permalink to this definition"></a></dt>
+<dd><p>Retrieves details of a specific good by its name from the goods service.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>good_name</strong> (<em>str</em>) – The name of the good.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A dictionary containing information about the specified good.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="Doc_Ser3.get_user_purchase_history">
+<span class="sig-prename descclassname"><span class="pre">Doc_Ser3.</span></span><span class="sig-name descname"><span class="pre">get_user_purchase_history</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">customer_username</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Doc_Ser3.html#get_user_purchase_history"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Doc_Ser3.get_user_purchase_history" title="Permalink to this definition"></a></dt>
+<dd><p>Retrieves the purchase history of a specific user from the purchase history table.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>customer_username</strong> (<em>str</em>) – The username of the customer.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of dictionaries containing information about each purchase of the user.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="Doc_Ser3.make_sale">
+<span class="sig-prename descclassname"><span class="pre">Doc_Ser3.</span></span><span class="sig-name descname"><span class="pre">make_sale</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">good_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">customer_username</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Doc_Ser3.html#make_sale"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Doc_Ser3.make_sale" title="Permalink to this definition"></a></dt>
+<dd><p>Processes a sale, deducting money from the customer’s wallet, updating the goods count, and saving the purchase history.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>good_name</strong> (<em>str</em>) – The name of the good to be purchased.</p></li>
+<li><p><strong>customer_username</strong> (<em>str</em>) – The username of the customer making the purchase.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A dictionary containing a status message or an error message if the sale process fails.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="Doc_Ser3.save_purchase_history">
+<span class="sig-prename descclassname"><span class="pre">Doc_Ser3.</span></span><span class="sig-name descname"><span class="pre">save_purchase_history</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">purchase_history</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Doc_Ser3.html#save_purchase_history"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Doc_Ser3.save_purchase_history" title="Permalink to this definition"></a></dt>
+<dd><p>Saves the purchase history to the purchase history table.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>purchase_history</strong> (<em>dict</em>) – A dictionary containing information about the purchase.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Doc_Ser2.html" class="btn btn-neutral float-left" title="Doc_Ser2 module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="test_service1.html" class="btn btn-neutral float-right" title="test_service1 module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Halawi Ghosn H, Mosleh J.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Doc_Ser1 module &mdash; Wallet Project 435L 0.9 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Doc_Ser2 module" href="Doc_Ser2.html" />
+    <link rel="prev" title="Calls3 module" href="Calls3.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Wallet Project 435L
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">Project435L</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Calls1.html">Calls1 module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Calls2.html">Calls2 module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Calls3.html">Calls3 module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Doc_Ser1 module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Doc_Ser1.charge_wallet"><code class="docutils literal notranslate"><span class="pre">charge_wallet()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Doc_Ser1.connect_to_db"><code class="docutils literal notranslate"><span class="pre">connect_to_db()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Doc_Ser1.create_customer_table"><code class="docutils literal notranslate"><span class="pre">create_customer_table()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Doc_Ser1.deduct_wallet"><code class="docutils literal notranslate"><span class="pre">deduct_wallet()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Doc_Ser1.delete_customer"><code class="docutils literal notranslate"><span class="pre">delete_customer()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Doc_Ser1.get_customer_by_username"><code class="docutils literal notranslate"><span class="pre">get_customer_by_username()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Doc_Ser1.get_customers"><code class="docutils literal notranslate"><span class="pre">get_customers()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Doc_Ser1.insert_customer"><code class="docutils literal notranslate"><span class="pre">insert_customer()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Doc_Ser1.update_customer"><code class="docutils literal notranslate"><span class="pre">update_customer()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Doc_Ser2.html">Doc_Ser2 module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Doc_Ser3.html">Doc_Ser3 module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_service1.html">test_service1 module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_service2.html">test_service2 module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_service3.html">test_service3 module</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Wallet Project 435L</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">Project435L</a></li>
+      <li class="breadcrumb-item active">Doc_Ser1 module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/Doc_Ser1.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-Doc_Ser1">
+<span id="doc-ser1-module"></span><h1>Doc_Ser1 module<a class="headerlink" href="#module-Doc_Ser1" title="Permalink to this heading"></a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="Doc_Ser1.charge_wallet">
+<span class="sig-prename descclassname"><span class="pre">Doc_Ser1.</span></span><span class="sig-name descname"><span class="pre">charge_wallet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amount</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Doc_Ser1.html#charge_wallet"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Doc_Ser1.charge_wallet" title="Permalink to this definition"></a></dt>
+<dd><p>Charges a customer’s wallet in the ‘customers’ table.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>username</strong> (<em>str</em>) – The username of the customer.</p></li>
+<li><p><strong>amount</strong> (<em>float</em>) – The amount to be added to the wallet.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A dictionary containing a status message.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="Doc_Ser1.connect_to_db">
+<span class="sig-prename descclassname"><span class="pre">Doc_Ser1.</span></span><span class="sig-name descname"><span class="pre">connect_to_db</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Doc_Ser1.html#connect_to_db"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Doc_Ser1.connect_to_db" title="Permalink to this definition"></a></dt>
+<dd><p>Establishes a connection to the SQLite database.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A connection object to the database.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>sqlite3.Connection</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="Doc_Ser1.create_customer_table">
+<span class="sig-prename descclassname"><span class="pre">Doc_Ser1.</span></span><span class="sig-name descname"><span class="pre">create_customer_table</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Doc_Ser1.html#create_customer_table"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Doc_Ser1.create_customer_table" title="Permalink to this definition"></a></dt>
+<dd><p>Creates the ‘customers’ table in the database if it does not exist.</p>
+<p>Prints a success message if the table is created, or an error message if the table creation fails.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="Doc_Ser1.deduct_wallet">
+<span class="sig-prename descclassname"><span class="pre">Doc_Ser1.</span></span><span class="sig-name descname"><span class="pre">deduct_wallet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">amount</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Doc_Ser1.html#deduct_wallet"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Doc_Ser1.deduct_wallet" title="Permalink to this definition"></a></dt>
+<dd><p>Deducts money from a customer’s wallet in the ‘customers’ table.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>username</strong> (<em>str</em>) – The username of the customer.</p></li>
+<li><p><strong>amount</strong> (<em>float</em>) – The amount to be deducted from the wallet.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A dictionary containing a status message.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="Doc_Ser1.delete_customer">
+<span class="sig-prename descclassname"><span class="pre">Doc_Ser1.</span></span><span class="sig-name descname"><span class="pre">delete_customer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">customer_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Doc_Ser1.html#delete_customer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Doc_Ser1.delete_customer" title="Permalink to this definition"></a></dt>
+<dd><p>Deletes a customer from the ‘customers’ table.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>customer_id</strong> (<em>int</em>) – The ID of the customer to be deleted.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A dictionary containing a status message.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="Doc_Ser1.get_customer_by_username">
+<span class="sig-prename descclassname"><span class="pre">Doc_Ser1.</span></span><span class="sig-name descname"><span class="pre">get_customer_by_username</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">username</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Doc_Ser1.html#get_customer_by_username"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Doc_Ser1.get_customer_by_username" title="Permalink to this definition"></a></dt>
+<dd><p>Retrieves a customer by their username from the ‘customers’ table.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>username</strong> (<em>str</em>) – The username of the customer.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A dictionary representing the customer or an empty dictionary if not found.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="Doc_Ser1.get_customers">
+<span class="sig-prename descclassname"><span class="pre">Doc_Ser1.</span></span><span class="sig-name descname"><span class="pre">get_customers</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Doc_Ser1.html#get_customers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Doc_Ser1.get_customers" title="Permalink to this definition"></a></dt>
+<dd><p>Retrieves a list of all customers from the ‘customers’ table.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A list of dictionaries, each representing a customer.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="Doc_Ser1.insert_customer">
+<span class="sig-prename descclassname"><span class="pre">Doc_Ser1.</span></span><span class="sig-name descname"><span class="pre">insert_customer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">customer</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Doc_Ser1.html#insert_customer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Doc_Ser1.insert_customer" title="Permalink to this definition"></a></dt>
+<dd><p>Inserts a new customer into the ‘customers’ table.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>customer</strong> (<em>dict</em>) – A dictionary containing customer information.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A dictionary representing the inserted customer or an error message.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="Doc_Ser1.update_customer">
+<span class="sig-prename descclassname"><span class="pre">Doc_Ser1.</span></span><span class="sig-name descname"><span class="pre">update_customer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">customer</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Doc_Ser1.html#update_customer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Doc_Ser1.update_customer" title="Permalink to this definition"></a></dt>
+<dd><p>Updates customer information in the ‘customers’ table.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>customer</strong> (<em>dict</em>) – A dictionary containing updated customer information.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A dictionary representing the updated customer or an empty dictionary if an error occurs.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Calls3.html" class="btn btn-neutral float-left" title="Calls3 module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Doc_Ser2.html" class="btn btn-neutral float-right" title="Doc_Ser2 module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Halawi Ghosn H, Mosleh J.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
