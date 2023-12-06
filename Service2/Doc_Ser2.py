@@ -1,14 +1,25 @@
 import sqlite3
 
 def connect_to_db():
+    """
+    Establishes a connection to the SQLite database.
+
+    Returns:
+        sqlite3.Connection: A connection object to the database.
+    """
     conn = sqlite3.connect('inventory.db')
     return conn
 
 def create_goods_table():
+    """
+    Creates the 'goods' table in the database if it does not exist.
+
+    Prints a success message if the table is created, or an error message if the table creation fails.
+    """
     try:
         conn = connect_to_db()
         conn.execute('''
-            CREATE TABLE goods (
+            CREATE TABLE IF NOT EXISTS goods (
                 id INTEGER PRIMARY KEY NOT NULL,
                 name TEXT NOT NULL,
                 category TEXT NOT NULL,
@@ -25,6 +36,15 @@ def create_goods_table():
         conn.close()
 
 def insert_goods(goods):
+    """
+    Inserts new goods into the 'goods' table.
+
+    Args:
+        goods (dict): A dictionary containing goods information.
+
+    Returns:
+        dict: A dictionary representing the inserted goods or an empty dictionary if an error occurs.
+    """
     inserted_goods = {}
     try:
         conn = connect_to_db()
@@ -41,6 +61,12 @@ def insert_goods(goods):
     return inserted_goods
 
 def get_goods():
+    """
+    Retrieves a list of all goods from the 'goods' table.
+
+    Returns:
+        list: A list of dictionaries, each representing goods information.
+    """
     goods_list = []
     try:
         conn = connect_to_db()
@@ -57,6 +83,15 @@ def get_goods():
     return goods_list
 
 def get_goods_by_id(goods_id):
+    """
+    Retrieves goods by their ID from the 'goods' table.
+
+    Args:
+        goods_id (int): The ID of the goods.
+
+    Returns:
+        dict: A dictionary representing the goods or an empty dictionary if not found.
+    """
     goods = {}
     try:
         conn = connect_to_db()
@@ -72,6 +107,15 @@ def get_goods_by_id(goods_id):
     return goods
 
 def update_goods(goods):
+    """
+    Updates goods information in the 'goods' table.
+
+    Args:
+        goods (dict): A dictionary containing updated goods information.
+
+    Returns:
+        dict: A dictionary representing the updated goods or an empty dictionary if an error occurs.
+    """
     updated_goods = {}
     try:
         conn = connect_to_db()
@@ -88,11 +132,20 @@ def update_goods(goods):
     return updated_goods
 
 def deduct_goods(goods_id):
+    """
+    Deducts goods from the 'goods' table.
+
+    Args:
+        goods_id (int): The ID of the goods to be deducted.
+
+    Returns:
+        dict: A dictionary containing a status message.
+    """
     message = {}
     try:
         conn = connect_to_db()
         cur = conn.cursor()
-        cur.execute("DELETE from goods WHERE id = ?", (goods_id,))
+        cur.execute("DELETE FROM goods WHERE id = ?", (goods_id,))
         conn.commit()
         message["status"] = "Goods deducted successfully"
     except:
@@ -105,12 +158,3 @@ def deduct_goods(goods_id):
 
 # Initialize goods table
 create_goods_table()
-
-# Example goods data
-goods_data = {
-    "name": "Laptop",
-    "category": "electronics",
-    "price": 1200.00,
-    "description": "High-performance laptop",
-    "count": 10
-}
