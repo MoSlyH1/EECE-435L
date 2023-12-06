@@ -1,15 +1,25 @@
 import sqlite3
 
-
 def connect_to_db():
+    """
+    Establishes a connection to the SQLite database.
+
+    Returns:
+        sqlite3.Connection: A connection object to the database.
+    """
     conn = sqlite3.connect('customer_database.db')
     return conn
 
 def create_customer_table():
+    """
+    Creates the 'customers' table in the database if it does not exist.
+
+    Prints a success message if the table is created, or an error message if the table creation fails.
+    """
     try:
         conn = connect_to_db()
         conn.execute('''
-            CREATE TABLE customers (
+            CREATE TABLE IF NOT EXISTS customers (
                 id INTEGER PRIMARY KEY NOT NULL,
                 full_name TEXT NOT NULL,
                 username TEXT UNIQUE NOT NULL,
@@ -29,6 +39,15 @@ def create_customer_table():
         conn.close()
 
 def insert_customer(customer):
+    """
+    Inserts a new customer into the 'customers' table.
+
+    Args:
+        customer (dict): A dictionary containing customer information.
+
+    Returns:
+        dict: A dictionary representing the inserted customer or an error message.
+    """
     inserted_customer = {}
     try:
         conn = connect_to_db()
@@ -49,6 +68,12 @@ def insert_customer(customer):
     return inserted_customer
 
 def get_customers():
+    """
+    Retrieves a list of all customers from the 'customers' table.
+
+    Returns:
+        list: A list of dictionaries, each representing a customer.
+    """
     customers_list = []
     try:
         conn = connect_to_db()
@@ -65,6 +90,15 @@ def get_customers():
     return customers_list
 
 def get_customer_by_username(username):
+    """
+    Retrieves a customer by their username from the 'customers' table.
+
+    Args:
+        username (str): The username of the customer.
+
+    Returns:
+        dict: A dictionary representing the customer or an empty dictionary if not found.
+    """
     customer = {}
     try:
         conn = connect_to_db()
@@ -80,6 +114,15 @@ def get_customer_by_username(username):
     return customer
 
 def update_customer(customer):
+    """
+    Updates customer information in the 'customers' table.
+
+    Args:
+        customer (dict): A dictionary containing updated customer information.
+
+    Returns:
+        dict: A dictionary representing the updated customer or an empty dictionary if an error occurs.
+    """
     updated_customer = {}
     try:
         conn = connect_to_db()
@@ -103,6 +146,15 @@ def update_customer(customer):
     return updated_customer
 
 def delete_customer(customer_id):
+    """
+    Deletes a customer from the 'customers' table.
+
+    Args:
+        customer_id (int): The ID of the customer to be deleted.
+
+    Returns:
+        dict: A dictionary containing a status message.
+    """
     message = {}
     try:
         conn = connect_to_db()
@@ -118,6 +170,16 @@ def delete_customer(customer_id):
     return message
 
 def charge_wallet(username, amount):
+    """
+    Charges a customer's wallet in the 'customers' table.
+
+    Args:
+        username (str): The username of the customer.
+        amount (float): The amount to be added to the wallet.
+
+    Returns:
+        dict: A dictionary containing a status message.
+    """
     message = {}
     try:
         conn = connect_to_db()
@@ -134,6 +196,16 @@ def charge_wallet(username, amount):
     return message
 
 def deduct_wallet(username, amount):
+    """
+    Deducts money from a customer's wallet in the 'customers' table.
+
+    Args:
+        username (str): The username of the customer.
+        amount (float): The amount to be deducted from the wallet.
+
+    Returns:
+        dict: A dictionary containing a status message.
+    """
     message = {}
     try:
         conn = connect_to_db()
@@ -157,14 +229,3 @@ def deduct_wallet(username, amount):
 
 # Initialize customers table
 create_customer_table()
-
-# Example customer data
-customer_data = {
-    "full_name": "John Doe",
-    "username": "johndoe",
-    "password": "securepassword",
-    "age": 30,
-    "address": "123 Main Street, Cityville",
-    "gender": "Male",
-    "marital_status": "Single"
-}
