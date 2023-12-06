@@ -67,6 +67,36 @@ def save_purchase_history(purchase_history):
     finally:
         conn.close()
 
+def get_full_purchase_history():
+    try:
+        conn = connect_to_db()
+        conn.row_factory = sqlite3.Row
+        cur = conn.cursor()
+        cur.execute("SELECT * FROM purchase_history")
+        rows = cur.fetchall()
+        purchase_history_list = [dict(row) for row in rows]
+        return purchase_history_list
+    except Exception as e:
+        print(f"Error fetching full purchase history: {str(e)}")
+        return {"error": "Error fetching full purchase history"}
+    finally:
+        conn.close()
+
+def get_user_purchase_history(customer_username):
+    try:
+        conn = connect_to_db()
+        conn.row_factory = sqlite3.Row
+        cur = conn.cursor()
+        cur.execute("SELECT * FROM purchase_history WHERE customer_username = ?", (customer_username,))
+        rows = cur.fetchall()
+        user_purchase_history = [dict(row) for row in rows]
+        return user_purchase_history
+    except Exception as e:
+        print(f"Error fetching user purchase history: {str(e)}")
+        return {"error": "Error fetching user purchase history"}
+    finally:
+        conn.close()
+
 def make_sale(good_name, customer_username):
     try:
         # Check if the good is available
@@ -90,12 +120,20 @@ def make_sale(good_name, customer_username):
         if response_deduct.status_code != 200:
             return {"error": "Error deducting money from customer's wallet"}
 
-        # Deduct the count of the purchased good
-        response_deduct_goods = requests.put(f"{GOODS_SERVICE_URL}/deduct_goods/{good_details['id']}/1")
-        if response_deduct_goods.status_code != 200:
+        # Update the count of the purchased good
+        updated_goods = {
+            "id": good_details["id"],
+            "name": good_details["name"],
+            "category": good_details["category"],
+            "price": good_details["price"],
+            "description": good_details["description"],
+            "count": good_details["count"] - 1  # Assuming 1 item per purchase
+        }
+        response_update_goods = requests.put(f"{GOODS_SERVICE_URL}/update_goods", json=updated_goods)
+        if response_update_goods.status_code != 200:
             # Rollback the deducted money
             requests.put(f"{CUSTOMER_SERVICE_URL}/charge_wallet/{customer_username}/{good_price}")
-            return {"error": "Error deducting goods count"}
+            return {"error": "Error updating goods count"}
 
         # Save the purchase history
         purchase_history = {
