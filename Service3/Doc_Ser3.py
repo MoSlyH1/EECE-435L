@@ -1,7 +1,5 @@
-
 import requests
 import sqlite3
-
 
 # URLs for the customer and goods services
 CUSTOMER_SERVICE_URL = "http://localhost:5001"  # Update with the actual URL of the customer service
@@ -9,14 +7,25 @@ GOODS_SERVICE_URL = "http://localhost:5002"     # Update with the actual URL of 
 
 # Database setup
 def connect_to_db():
+    """
+    Establishes a connection to the SQLite database.
+
+    Returns:
+        sqlite3.Connection: A connection object to the database.
+    """
     conn = sqlite3.connect('purchase_history.db')
     return conn
 
 def create_purchase_history_table():
+    """
+    Creates the 'purchase_history' table in the database if it does not exist.
+
+    Prints a success message if the table is created, or an error message if the table creation fails.
+    """
     try:
         conn = connect_to_db()
         conn.execute('''
-            CREATE TABLE purchase_history (
+            CREATE TABLE IF NOT EXISTS purchase_history (
                 id INTEGER PRIMARY KEY NOT NULL,
                 customer_username TEXT NOT NULL,
                 good_name TEXT NOT NULL,
@@ -35,6 +44,12 @@ def create_purchase_history_table():
 create_purchase_history_table()
 
 def display_available_goods():
+    """
+    Retrieves a list of available goods from the goods service.
+
+    Returns:
+        list: A list of dictionaries containing information about available goods.
+    """
     try:
         response = requests.get(f"{GOODS_SERVICE_URL}/get_goods")
         goods_list = response.json()
@@ -44,6 +59,15 @@ def display_available_goods():
         return {"error": f"Error fetching available goods: {str(e)}"}
 
 def get_good_details(good_name):
+    """
+    Retrieves details of a specific good by its name from the goods service.
+
+    Args:
+        good_name (str): The name of the good.
+
+    Returns:
+        dict: A dictionary containing information about the specified good.
+    """
     try:
         response = requests.get(f"{GOODS_SERVICE_URL}/get_goods")
         goods_list = response.json()
@@ -55,6 +79,12 @@ def get_good_details(good_name):
         return {"error": f"Error fetching good details: {str(e)}"}
 
 def save_purchase_history(purchase_history):
+    """
+    Saves the purchase history to the purchase history table.
+
+    Args:
+        purchase_history (dict): A dictionary containing information about the purchase.
+    """
     try:
         conn = connect_to_db()
         cur = conn.cursor()
@@ -68,6 +98,12 @@ def save_purchase_history(purchase_history):
         conn.close()
 
 def get_full_purchase_history():
+    """
+    Retrieves the full purchase history from the purchase history table.
+
+    Returns:
+        list: A list of dictionaries containing information about each purchase.
+    """
     try:
         conn = connect_to_db()
         conn.row_factory = sqlite3.Row
@@ -83,6 +119,15 @@ def get_full_purchase_history():
         conn.close()
 
 def get_user_purchase_history(customer_username):
+    """
+    Retrieves the purchase history of a specific user from the purchase history table.
+
+    Args:
+        customer_username (str): The username of the customer.
+
+    Returns:
+        list: A list of dictionaries containing information about each purchase of the user.
+    """
     try:
         conn = connect_to_db()
         conn.row_factory = sqlite3.Row
@@ -98,6 +143,16 @@ def get_user_purchase_history(customer_username):
         conn.close()
 
 def make_sale(good_name, customer_username):
+    """
+    Processes a sale, deducting money from the customer's wallet, updating the goods count, and saving the purchase history.
+
+    Args:
+        good_name (str): The name of the good to be purchased.
+        customer_username (str): The username of the customer making the purchase.
+
+    Returns:
+        dict: A dictionary containing a status message or an error message if the sale process fails.
+    """
     try:
         # Check if the good is available
         good_details = get_good_details(good_name)
@@ -140,7 +195,7 @@ def make_sale(good_name, customer_username):
             "customer_username": customer_username,
             "good_name": good_name,
             "good_price": good_price,
-            "timestamp": "current_timestamp()"  # You may use a library like datetime to get the actual timestamp
+            "timestamp": "current_timestamp()"  # could have used datetime but decided to just comment it out for now
         }
         save_purchase_history(purchase_history)
 
