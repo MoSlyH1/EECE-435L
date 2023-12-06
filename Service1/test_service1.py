@@ -74,7 +74,7 @@ def test_charge_wallet_route():
 
     Asserts that the status code of the response is 200.
     """
-    response = requests.put(f'{BASE_URL}/charge_wallet/username/100.0')
+    response = requests.put(f'{BASE_URL}/charge_wallet/hemag/100000.0')
     assert response.status_code == 200
 
 def test_deduct_wallet_route():
@@ -83,7 +83,7 @@ def test_deduct_wallet_route():
 
     Asserts that the status code of the response is 200.
     """
-    response = requests.put(f'{BASE_URL}/deduct_wallet/username/50.0')
+    response = requests.put(f'{BASE_URL}/deduct_wallet/hemag/50.0')
     assert response.status_code == 200
 
 # Run the tests
