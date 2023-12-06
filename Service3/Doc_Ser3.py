@@ -2,8 +2,8 @@ import requests
 import sqlite3
 
 # URLs for the customer and goods services
-CUSTOMER_SERVICE_URL = "http://localhost:5001"  # Update with the actual URL of the customer service
-GOODS_SERVICE_URL = "http://localhost:5002"     # Update with the actual URL of the goods service
+CUSTOMER_SERVICE_URL = "http://localhost:5001" 
+GOODS_SERVICE_URL = "http://localhost:5002"
 
 # Database setup
 def connect_to_db():
